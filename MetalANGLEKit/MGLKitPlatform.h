@@ -11,9 +11,10 @@
 
 #if TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_TV
 #    include <UIKit/UIKit.h>
+#    include <GameController/GCEventViewController.h>
 
 @compatibility_alias MGLKNativeView UIView;
-@compatibility_alias MGLKNativeViewController UIViewController;
+@compatibility_alias MGLKNativeViewController GCEventViewController;
 
 #    define MGLKApplicationWillResignActiveNotification UIApplicationWillResignActiveNotification
 #    define MGLKApplicationDidBecomeActiveNotification UIApplicationDidBecomeActiveNotification

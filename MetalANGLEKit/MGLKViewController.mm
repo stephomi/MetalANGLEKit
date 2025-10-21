@@ -125,7 +125,6 @@
 {
     [super viewDidAppear:animated];
 #endif  // TARGET_OS_OSX
-    NSLog(@"MGLKViewController viewDidAppear");
 
     // Implementation dependent
     [self resume];
@@ -152,7 +151,6 @@
 {
     [super viewDidDisappear:animated];
 #endif  // TARGET_OS_OSX
-    NSLog(@"MGLKViewController viewDidDisappear");
     _appWasInBackground = YES;
 
     // Implementation dependent
@@ -170,7 +168,6 @@
 
 - (void)appWillPause:(NSNotification *)note
 {
-    NSLog(@"MGLKViewController appWillPause:");
     if (_pauseOnWillResignActive) {
         _appWasInBackground = YES;
         self.paused = YES;
@@ -179,7 +176,6 @@
 
 - (void)appDidBecomeActive:(NSNotification *)note
 {
-    NSLog(@"MGLKViewController appDidBecomeActive:");
     if (_resumeOnDidBecomeActive) {
         self.paused = NO;
     }

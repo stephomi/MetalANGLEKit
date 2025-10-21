@@ -350,18 +350,9 @@ GLint LinkProgram(GLuint program)
 
     _eglSurface = EGL_NO_SURFACE;
 
-    if (ANGLEIsMetalRendererAvailable())
-    {
-        _metalLayer       = [[CAMetalLayer alloc] init];
-        _metalLayer.frame = self.bounds;
-        [self addSublayer:_metalLayer];
-    }
-    else
-    {
-        _legacyGLLayer       = [[CALayer alloc] init];
-        _legacyGLLayer.frame = self.bounds;
-        [self addSublayer:_legacyGLLayer];
-    }
+    _metalLayer       = [[CAMetalLayer alloc] init];
+    _metalLayer.frame = self.bounds;
+    [self addSublayer:_metalLayer];
 }
 
 - (void)dealloc
@@ -375,29 +366,16 @@ GLint LinkProgram(GLuint program)
 {
     [super setContentsScale:contentsScale];
 
-    if (ANGLEIsMetalRendererAvailable())
-    {
-        _metalLayer.contentsScale = contentsScale;
-    }
-    else
-    {
-        _legacyGLLayer.contentsScale = contentsScale;
-    }
+    _metalLayer.contentsScale = contentsScale;
 }
 
 - (CGSize)drawableSize
 {
-    if (ANGLEIsMetalRendererAvailable())
+    if (_metalLayer.drawableSize.width == 0 && _metalLayer.drawableSize.height == 0)
     {
-        if (_metalLayer.drawableSize.width == 0 && _metalLayer.drawableSize.height == 0)
-        {
-            [self checkLayerSize];
-        }
-        return _metalLayer.drawableSize;
+        [self checkLayerSize];
     }
-
-    return CGSizeMake(self.bounds.size.width * self.contentsScale,
-                      self.bounds.size.height * self.contentsScale);
+    return _metalLayer.drawableSize;
 }
 
 - (BOOL)setCurrentContext:(MGLContext *)context
@@ -595,31 +573,11 @@ GLint LinkProgram(GLuint program)
 - (void)setDrawableMultisample:(MGLDrawableMultisample)drawableMultisample
 {
     _drawableMultisample = drawableMultisample;
-    if (!ANGLEIsMetalRendererAvailable() && _drawableMultisample > 0)
-    {
-        // Default backbuffer MSAA is not supported in native GL backend yet.
-        // Use offscreen MSAA buffer.
-        _useOffscreenFBO = YES;
-    }
     [self releaseSurface];
 }
 
 - (void)setRetainedBacking:(BOOL)retainedBacking
 {
-    if (!ANGLEIsMetalRendererAvailable())
-    {
-        if (_drawableMultisample > 0)
-        {
-            // Default backbuffer MSAA is not supported in native GL backend yet.
-            // Always use offscreen MSAA buffer.
-            _useOffscreenFBO = YES;
-        }
-        else
-        {
-            _useOffscreenFBO = retainedBacking;
-        }
-    }
-    // else Metal back-end already supports preserve swap behavior.
     _retainedBacking = retainedBacking;
 }
 
@@ -675,22 +633,15 @@ GLint LinkProgram(GLuint program)
 
 - (void)checkLayerSize
 {
-    if (ANGLEIsMetalRendererAvailable())
-    {
-        // Resize the metal layer
-        [CATransaction begin];
-        [CATransaction setValue:(id)kCFBooleanTrue
-                         forKey:kCATransactionDisableActions];
-        _metalLayer.frame = self.bounds;
-        _metalLayer.drawableSize =
-            CGSizeMake(_metalLayer.bounds.size.width * _metalLayer.contentsScale,
-                       _metalLayer.bounds.size.height * _metalLayer.contentsScale);
-        [CATransaction commit];
-    }
-    else
-    {
-        _legacyGLLayer.frame = self.bounds;
-    }
+    // Resize the metal layer
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue
+                     forKey:kCATransactionDisableActions];
+    _metalLayer.frame = self.bounds;
+    _metalLayer.drawableSize =
+        CGSizeMake(_metalLayer.bounds.size.width * _metalLayer.contentsScale,
+                   _metalLayer.bounds.size.height * _metalLayer.contentsScale);
+    [CATransaction commit];
 }
 
 - (void)ensureSurfaceCreated
@@ -746,15 +697,7 @@ GLint LinkProgram(GLuint program)
 
     EGLNativeWindowType nativeWindowPtr;
 
-    if (ANGLEIsMetalRendererAvailable())
-    {
-        // If metal layer is available, use it directly
-        nativeWindowPtr = (__bridge EGLNativeWindowType)_metalLayer;
-    }
-    else
-    {
-        nativeWindowPtr = (__bridge EGLNativeWindowType)_legacyGLLayer;
-    }
+    nativeWindowPtr = (__bridge EGLNativeWindowType)_metalLayer;
 
     _eglSurface =
         eglCreateWindowSurface(_display.eglDisplay, config, nativeWindowPtr, creationAttribs);
@@ -1031,18 +974,9 @@ GLint LinkProgram(GLuint program)
     _offscreenColorUnsizedFormat  = textureFormat;
     _offscreenColorFormatDataType = type;
 
-    if (ANGLEIsMetalRendererAvailable())
-    {
-        glTexStorage2DEXT(GL_TEXTURE_2D, 1, textureSizedFormat,
-                            static_cast<GLsizei>(_offscreenFBOSize.width),
-                            static_cast<GLsizei>(_offscreenFBOSize.height));
-    }
-    else
-    {
-        glTexImage2D(
-            GL_TEXTURE_2D, 0, textureFormat, static_cast<GLsizei>(_offscreenFBOSize.width),
-            static_cast<GLsizei>(_offscreenFBOSize.height), 0, textureFormat, type, nullptr);
-    }
+    glTexStorage2DEXT(GL_TEXTURE_2D, 1, textureSizedFormat,
+                        static_cast<GLsizei>(_offscreenFBOSize.width),
+                        static_cast<GLsizei>(_offscreenFBOSize.height));
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

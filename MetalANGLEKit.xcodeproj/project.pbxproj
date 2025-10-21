@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F06E06202D1EE21C001E4654 /* libEGL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098B64B2C6CFAB3005B999A /* libEGL.xcframework */; };
-		F092D3AE2C74BC060076C252 /* libfeature_support.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F092D3AD2C74BC060076C252 /* libfeature_support.xcframework */; };
+		97E071472EA73D0E00ACF823 /* libGLESv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071442EA73D0E00ACF823 /* libGLESv2.framework */; };
+		97E071482EA73D0E00ACF823 /* libGLESv2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071442EA73D0E00ACF823 /* libGLESv2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		97E071492EA73D0E00ACF823 /* libEGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071452EA73D0E00ACF823 /* libEGL.framework */; };
+		97E0714A2EA73D0E00ACF823 /* libEGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071452EA73D0E00ACF823 /* libEGL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		97E0714B2EA73D0E00ACF823 /* libfeature_support.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071462EA73D0E00ACF823 /* libfeature_support.framework */; };
+		97E0714C2EA73D0E00ACF823 /* libfeature_support.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071462EA73D0E00ACF823 /* libfeature_support.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		97E071532EA73E3B00ACF823 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071522EA73E3B00ACF823 /* CoreGraphics.framework */; };
+		97E071552EA73E5700ACF823 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071542EA73E5700ACF823 /* QuartzCore.framework */; };
+		97E071572EA73E6600ACF823 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071562EA73E6600ACF823 /* GameController.framework */; };
+		97E071592EA73E7200ACF823 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E071582EA73E7200ACF823 /* UIKit.framework */; platformFilter = ios; };
 		F092D3B12C74BC900076C252 /* feature_support_util.h in Headers */ = {isa = PBXBuildFile; fileRef = F092D3B02C74BC900076C252 /* feature_support_util.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F092D3B32C74BD190076C252 /* export.h in Headers */ = {isa = PBXBuildFile; fileRef = F092D3B22C74BD190076C252 /* export.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F098B6042C6B7160005B999A /* MetalANGLEKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F098B6032C6B7160005B999A /* MetalANGLEKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,12 +35,7 @@
 		F098B62A2C6B71D2005B999A /* MGLLayer+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = F098B6182C6B71D2005B999A /* MGLLayer+Private.h */; };
 		F098B62C2C6B71D2005B999A /* MGLDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = F098B61A2C6B71D2005B999A /* MGLDisplay.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F098B62D2C6B71D2005B999A /* MGLLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F098B61B2C6B71D2005B999A /* MGLLayer.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc -fexceptions -fvisibility=default -DGL_GLEXT_PROTOTYPES"; }; };
-		F098B6312C6B85F4005B999A /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098B6302C6B85F4005B999A /* Metal.framework */; };
-		F098B6332C6BF952005B999A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098B6322C6BF952005B999A /* QuartzCore.framework */; };
-		F098B6352C6BF969005B999A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098B6342C6BF969005B999A /* UIKit.framework */; platformFilter = ios; };
-		F098B6372C6BF99C005B999A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098B6362C6BF99B005B999A /* CoreGraphics.framework */; };
 		F098B6392C6BFB42005B999A /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098B6382C6BFB42005B999A /* AppKit.framework */; platformFilters = (macos, ); };
-		F098B6462C6CF2D1005B999A /* libGLESv2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098B6442C6CF2D1005B999A /* libGLESv2.xcframework */; };
 		F098B7092C6EA417005B999A /* GLES2 in Headers */ = {isa = PBXBuildFile; fileRef = F098B7022C6EA417005B999A /* GLES2 */; settings = {ATTRIBUTES = (Public, ); }; };
 		F098B70A2C6EA417005B999A /* GLES in Headers */ = {isa = PBXBuildFile; fileRef = F098B7032C6EA417005B999A /* GLES */; settings = {ATTRIBUTES = (Public, ); }; };
 		F098B70B2C6EA417005B999A /* EGL in Headers */ = {isa = PBXBuildFile; fileRef = F098B7042C6EA417005B999A /* EGL */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,8 +43,32 @@
 		F098B70E2C6EA417005B999A /* KHR in Headers */ = {isa = PBXBuildFile; fileRef = F098B7072C6EA417005B999A /* KHR */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		97E0714D2EA73D0E00ACF823 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				97E071482EA73D0E00ACF823 /* libGLESv2.framework in Embed Frameworks */,
+				97E0714A2EA73D0E00ACF823 /* libEGL.framework in Embed Frameworks */,
+				97E0714C2EA73D0E00ACF823 /* libfeature_support.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		F092D3AD2C74BC060076C252 /* libfeature_support.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libfeature_support.xcframework; path = Frameworks/libfeature_support.xcframework; sourceTree = "<group>"; };
+		97E071442EA73D0E00ACF823 /* libGLESv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libGLESv2.framework; path = Frameworks/libGLESv2.framework; sourceTree = "<group>"; };
+		97E071452EA73D0E00ACF823 /* libEGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libEGL.framework; path = Frameworks/libEGL.framework; sourceTree = "<group>"; };
+		97E071462EA73D0E00ACF823 /* libfeature_support.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libfeature_support.framework; path = Frameworks/libfeature_support.framework; sourceTree = "<group>"; };
+		97E0714E2EA73DEC00ACF823 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		97E071502EA73E0900ACF823 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		97E071522EA73E3B00ACF823 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		97E071542EA73E5700ACF823 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		97E071562EA73E6600ACF823 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		97E071582EA73E7200ACF823 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		F092D3B02C74BC900076C252 /* feature_support_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = feature_support_util.h; path = angle/src/feature_support_util/feature_support_util.h; sourceTree = "<group>"; };
 		F092D3B22C74BD190076C252 /* export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = export.h; path = angle/include/export.h; sourceTree = "<group>"; };
 		F098B6002C6B7160005B999A /* MetalANGLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetalANGLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,13 +90,7 @@
 		F098B6192C6B71D2005B999A /* MGLKViewController+Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "MGLKViewController+Mac.mm"; sourceTree = "<group>"; };
 		F098B61A2C6B71D2005B999A /* MGLDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGLDisplay.h; sourceTree = "<group>"; };
 		F098B61B2C6B71D2005B999A /* MGLLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MGLLayer.mm; sourceTree = "<group>"; };
-		F098B6302C6B85F4005B999A /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
-		F098B6322C6BF952005B999A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		F098B6342C6BF969005B999A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		F098B6362C6BF99B005B999A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		F098B6382C6BFB42005B999A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		F098B6442C6CF2D1005B999A /* libGLESv2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libGLESv2.xcframework; path = Frameworks/libGLESv2.xcframework; sourceTree = "<group>"; };
-		F098B64B2C6CFAB3005B999A /* libEGL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libEGL.xcframework; path = Frameworks/libEGL.xcframework; sourceTree = "<group>"; };
 		F098B7022C6EA417005B999A /* GLES2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GLES2; path = angle/include/GLES2; sourceTree = "<group>"; };
 		F098B7032C6EA417005B999A /* GLES */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GLES; path = angle/include/GLES; sourceTree = "<group>"; };
 		F098B7042C6EA417005B999A /* EGL */ = {isa = PBXFileReference; lastKnownFileType = folder; name = EGL; path = angle/include/EGL; sourceTree = "<group>"; };
@@ -82,14 +103,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F06E06202D1EE21C001E4654 /* libEGL.xcframework in Frameworks */,
-				F098B6462C6CF2D1005B999A /* libGLESv2.xcframework in Frameworks */,
-				F098B6372C6BF99C005B999A /* CoreGraphics.framework in Frameworks */,
-				F098B6332C6BF952005B999A /* QuartzCore.framework in Frameworks */,
-				F092D3AE2C74BC060076C252 /* libfeature_support.xcframework in Frameworks */,
+				97E071532EA73E3B00ACF823 /* CoreGraphics.framework in Frameworks */,
+				97E071592EA73E7200ACF823 /* UIKit.framework in Frameworks */,
+				97E071572EA73E6600ACF823 /* GameController.framework in Frameworks */,
 				F098B6392C6BFB42005B999A /* AppKit.framework in Frameworks */,
-				F098B6352C6BF969005B999A /* UIKit.framework in Frameworks */,
-				F098B6312C6B85F4005B999A /* Metal.framework in Frameworks */,
+				97E071552EA73E5700ACF823 /* QuartzCore.framework in Frameworks */,
+				97E071492EA73D0E00ACF823 /* libEGL.framework in Frameworks */,
+				97E071472EA73D0E00ACF823 /* libGLESv2.framework in Frameworks */,
+				97E0714B2EA73D0E00ACF823 /* libfeature_support.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,14 +163,16 @@
 		F098B62F2C6B85F4005B999A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F092D3AD2C74BC060076C252 /* libfeature_support.xcframework */,
-				F098B64B2C6CFAB3005B999A /* libEGL.xcframework */,
-				F098B6442C6CF2D1005B999A /* libGLESv2.xcframework */,
+				97E071582EA73E7200ACF823 /* UIKit.framework */,
+				97E071562EA73E6600ACF823 /* GameController.framework */,
+				97E071542EA73E5700ACF823 /* QuartzCore.framework */,
+				97E071522EA73E3B00ACF823 /* CoreGraphics.framework */,
+				97E071502EA73E0900ACF823 /* MetalKit.framework */,
+				97E0714E2EA73DEC00ACF823 /* Metal.framework */,
+				97E071452EA73D0E00ACF823 /* libEGL.framework */,
+				97E071462EA73D0E00ACF823 /* libfeature_support.framework */,
+				97E071442EA73D0E00ACF823 /* libGLESv2.framework */,
 				F098B6382C6BFB42005B999A /* AppKit.framework */,
-				F098B6362C6BF99B005B999A /* CoreGraphics.framework */,
-				F098B6342C6BF969005B999A /* UIKit.framework */,
-				F098B6322C6BF952005B999A /* QuartzCore.framework */,
-				F098B6302C6B85F4005B999A /* Metal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -208,6 +231,7 @@
 				F098B5FC2C6B7160005B999A /* Sources */,
 				F098B5FD2C6B7160005B999A /* Frameworks */,
 				F098B5FE2C6B7160005B999A /* Resources */,
+				97E0714D2EA73D0E00ACF823 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,7 +302,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nHEADER_PATH=\"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}\"\n\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec sed -i '' 's/#ifdef METALANGLEKIT_INCLUDE/#if 1/g' {} +\n";
+			shellScript = "HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}\"\n\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include <EGL/|#include <MetalANGLEKit/EGL/|g' {} +\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include <GLES/|#include <MetalANGLEKit/GLES/|g' {} +\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include <GLES2/|#include <MetalANGLEKit/GLES2/|g' {} +\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include <GLES3/|#include <MetalANGLEKit/GLES3/|g' {} +\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include <KHR/|#include <MetalANGLEKit/KHR/|g' {} +\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include \"export.h\"|#include <MetalANGLEKit/export.h>|g' {} +\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include \"eglext_angle.h\"|#include <MetalANGLEKit/EGL/eglext_angle.h>|g' {} +\nfind \"$HEADER_PATH\" -type f -name \"*.h\" -exec \\\n  sed -i '' 's|#include \"gl2ext_angle.h\"|#include <MetalANGLEKit/GLES2/gl2ext_angle.h>|g' {} +\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -431,12 +455,16 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/angle/out/Release-iphoneos",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/angle/include";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -445,7 +473,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -480,12 +508,16 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/angle/out/Release-iphoneos",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/angle/include";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -494,7 +526,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";

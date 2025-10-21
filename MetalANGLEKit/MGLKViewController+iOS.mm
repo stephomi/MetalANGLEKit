@@ -10,7 +10,6 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"MGLKViewController viewDidLoad");
     [super viewDidLoad];
 }
 
@@ -43,8 +42,6 @@ NSInteger max(NSInteger a, NSInteger b) {
         return;
     }
 
-    NSLog(@"MGLKViewController pause");
-
     if (_displayLink)
     {
         [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
@@ -62,7 +59,6 @@ NSInteger max(NSInteger a, NSInteger b) {
     }
 
     [self pause];
-    NSLog(@"MGLKViewController resume");
 
     if (!_glView)
     {

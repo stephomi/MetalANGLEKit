@@ -1,86 +1,55 @@
 #!/bin/bash
-
 set -e
 
-copy_frameworks() {
-    local framework=$1
-    SDKS="device simulator"
-    for SDK in $SDKS; do 
-        mkdir $TEMP_DIR/$SDK/$framework.framework/Headers/
-        if [ "$framework" == "libEGL" ]; then
-            TO_COPY="EGL"
-        elif [ "$framework" == "libGLESv2" ]; then
-            TO_COPY="GLES GLES2 GLES3 KHR"
-        elif [ "$framework" == "libfeature_support" ]; then
-            cp angle/src/feature_support_util/feature_support_util.h $TEMP_DIR/$SDK/$framework.framework/Headers/
-            return
-        else
-            echo "Error: Unknown framework $framework."
-            exit 1
-        fi
-
-        for COPY in $TO_COPY; do
-            cp -R angle/include/$COPY $TEMP_DIR/$SDK/$framework.framework/Headers/$COPY
-        done
-    done
-}
-
-if [ "$#" -ne 1 ]; then
-    echo "Error: You must provide exactly one argument."
-    echo "Usage: $0 <Release/Debug>"
-    exit 1
+if [ -z "$FORCE_ANGLE_REBUILD" ] &&
+  [ -d "${SRCROOT}/Frameworks/libEGL.framework" ] &&
+  [ -d "${SRCROOT}/Frameworks/libGLESv2.framework" ] &&
+  [ -d "${SRCROOT}/Frameworks/libfeature_support.framework" ]; then
+  echo "ANGLE frameworks already present -> skipping rebuild (set FORCE_ANGLE_REBUILD=1 to force)."
+  exit 0
 fi
+
+cd "${SRCROOT}/angle"
+export PATH="${SRCROOT}/depot_tools:$PATH"
+
+unset SWIFT_DEBUG_INFORMATION_FORMAT
+unset SWIFT_DEBUG_INFORMATION_VERSION
 
 BUILD_TYPE="$1"
 
-if [ "$BUILD_TYPE" == "Release" ] || [ "$BUILD_TYPE" == "Debug" ]; then
-    echo "Using build type: $BUILD_TYPE"
-else
-    echo "Error: Invalid build type. Only 'Release' or 'Debug' are allowed."
-    exit 1
-fi
+rm -rf out/$BUILD_TYPE-iphoneos
+gn gen out/$BUILD_TYPE-iphoneos --args='
+  is_official_build=true
+  is_debug=false
 
-cd "$(dirname "$0")"
+  target_os="ios"
+  target_cpu="arm64"
+  target_environment="device"
 
-export PATH="$(pwd)/depot_tools:$PATH"
+  ios_deployment_target="16.0"
+  ios_enable_code_signing=false
 
-rm -rf Frameworks/
-mkdir Frameworks/
+  angle_build_all=false
+  angle_enable_metal=true
+  angle_enable_gl=false
+  angle_enable_null=false
+  angle_enable_wgpu=false
 
-autoninja -C angle/out/$BUILD_TYPE-iphoneos
-autoninja -C angle/out/$BUILD_TYPE-iphonesimulator_x86_64
-autoninja -C angle/out/$BUILD_TYPE-iphonesimulator_arm64
+  use_siso=false
+'
+autoninja -C out/$BUILD_TYPE-iphoneos libEGL libGLESv2 libfeature_support
 
-TEMP_DIR=$(mktemp -d)
+cd ..
+rm -rf Frameworks
+mkdir -p Frameworks
 
-mkdir $TEMP_DIR/simulator_x86_64
-mkdir $TEMP_DIR/simulator_arm64
-mkdir $TEMP_DIR/simulator
-mkdir $TEMP_DIR/device
+cp -R angle/out/$BUILD_TYPE-iphoneos/libEGL.framework Frameworks/
+cp -R angle/out/$BUILD_TYPE-iphoneos/libGLESv2.framework Frameworks/
+cp -R angle/out/$BUILD_TYPE-iphoneos/libfeature_support.framework Frameworks/
 
-FRAMEWORKS="libEGL libGLESv2 libfeature_support"
+/usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string 1.0" "Frameworks/libEGL.framework/Info.plist"
+/usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string 1.0" "Frameworks/libGLESv2.framework/Info.plist"
+/usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string 1.0" "Frameworks/libfeature_support.framework/Info.plist"
 
-for FRAMEWORK in $FRAMEWORKS; do
-    cp -R angle/out/$BUILD_TYPE-iphonesimulator_arm64/$FRAMEWORK.framework $TEMP_DIR/simulator/
-    cp -R angle/out/$BUILD_TYPE-iphoneos/$FRAMEWORK.framework $TEMP_DIR/device
-
-    lipo -create angle/out/$BUILD_TYPE-iphonesimulator_arm64/$FRAMEWORK.framework/$FRAMEWORK angle/out/$BUILD_TYPE-iphonesimulator_x86_64/$FRAMEWORK.framework/$FRAMEWORK \
-        -output $TEMP_DIR/simulator/$FRAMEWORK.framework/$FRAMEWORK
-
-    cp -R angle/out/$BUILD_TYPE-iphonesimulator_arm64/$FRAMEWORK.dSYM $TEMP_DIR/simulator/
-    cp -R angle/out/$BUILD_TYPE-iphoneos/$FRAMEWORK.dSYM $TEMP_DIR/device
-
-    lipo -create angle/out/$BUILD_TYPE-iphonesimulator_arm64/$FRAMEWORK.dSYM/Contents/Resources/DWARF/$FRAMEWORK \
-        angle/out/$BUILD_TYPE-iphonesimulator_x86_64/$FRAMEWORK.dSYM/Contents/Resources/DWARF/$FRAMEWORK \
-        -output $TEMP_DIR/simulator/$FRAMEWORK.dSYM/Contents/Resources/DWARF/$FRAMEWORK
-    
-    copy_frameworks $FRAMEWORK
-
-    /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string 1.0" "$TEMP_DIR/device/$FRAMEWORK.framework/Info.plist"
-    /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string 1.0" "$TEMP_DIR/simulator/$FRAMEWORK.framework/Info.plist"
-
-    xcodebuild -create-xcframework -framework $TEMP_DIR/device/$FRAMEWORK.framework -debug-symbols $TEMP_DIR/device/$FRAMEWORK.dSYM \
-        -framework $TEMP_DIR/simulator/$FRAMEWORK.framework -debug-symbols $TEMP_DIR/simulator/$FRAMEWORK.dSYM \
-        -output Frameworks/$FRAMEWORK.xcframework
-done
-
+echo "Frameworks ready in ./Frameworks:"
+ls -1 Frameworks

@@ -1,0 +1,38 @@
+diff --git a/src/feature_support_util/feature_support_util.h b/src/feature_support_util/feature_support_util.h
+index 54f5ec722a..6f9ef8ceb8 100644
+--- a/src/feature_support_util/feature_support_util.h
++++ b/src/feature_support_util/feature_support_util.h
+@@ -122,8 +122,13 @@ ANGLE_EXPORT void ANGLEFreeSystemInfoHandle(const SystemInfoHandle systemInfoHan
+ 
+ // The following are internal versions supported by the current  feature-support-utility API.
+ 
++#if 1
++#define kFeatureVersion_LowestSupported  2
++#define kFeatureVersion_HighestSupported 2
++#else
+ constexpr unsigned int kFeatureVersion_LowestSupported  = 2;
+ constexpr unsigned int kFeatureVersion_HighestSupported = 2;
++#endif
+ 
+ #ifdef __cplusplus
+ }  // extern "C"
+diff --git a/src/libANGLE/renderer/metal/ContextMtl.mm b/src/libANGLE/renderer/metal/ContextMtl.mm
+index 4a01efbcf7..1164e1809a 100644
+--- a/src/libANGLE/renderer/metal/ContextMtl.mm
++++ b/src/libANGLE/renderer/metal/ContextMtl.mm
+@@ -1994,6 +1994,7 @@ mtl::RenderCommandEncoder *ContextMtl::getRenderTargetCommandEncoder(
+ 
+ mtl::BlitCommandEncoder *ContextMtl::getBlitCommandEncoder()
+ {
++    flushCommandBufferIfNeeded();
+     if (mRenderEncoder.valid() || mComputeEncoder.valid())
+     {
+         endEncoding(true);
+@@ -2012,6 +2013,7 @@ mtl::BlitCommandEncoder *ContextMtl::getBlitCommandEncoder()
+ 
+ mtl::BlitCommandEncoder *ContextMtl::getBlitCommandEncoderWithoutEndingRenderEncoder()
+ {
++    flushCommandBufferIfNeeded();
+     if (mBlitEncoder.valid())
+     {
+         return &mBlitEncoder;

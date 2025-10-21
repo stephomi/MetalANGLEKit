@@ -2,5 +2,6 @@
 Frameworks/
 project.xcworkspace
 xcuserdata
-build/
+build-ios/
+build-mac/
 tmp/
